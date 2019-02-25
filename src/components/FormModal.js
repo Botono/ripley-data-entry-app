@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { isNull } from 'lodash';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
+
+import { postData } from '../common/utils'
 
 import WaterForm from './EntryForms/Water';
 
@@ -20,6 +23,7 @@ class FormModal extends Component {
 
         this.state = {
             form_data: {},
+            form_error: null,
         };
     }
 
@@ -30,6 +34,7 @@ class FormModal extends Component {
     updateFormData = (data) => {
         this.setState({
             form_data: data,
+            form_error: null,
         });
     }
 
@@ -64,8 +69,33 @@ class FormModal extends Component {
         return '';
     }
 
+    getEndpoint = () => {
+        let { whichForm } = this.props;
+        if (!isNull(whichForm)) {
+            return this.form_config[this.props.whichForm].endpoint;
+        }
+
+        return '';
+    }
+
     saveForm = () => {
-        console.dir(this.state.form_data);
+        const that = this;
+        let { form_data } = this.state;
+
+        postData(this.getEndpoint(), form_data)
+            .then(function (json_data) {
+                console.dir(json_data);
+                if (json_data['error']) {
+                    that.setState({
+                        form_error: json_data.error,
+                    });
+                } else {
+                    that.setState({
+                        form_data: {},
+                        form_error: null,
+                    }, this.props.closeModal);
+                }
+            });
     }
 
     render() {
@@ -74,11 +104,14 @@ class FormModal extends Component {
                 show={this.props.showModal}
                 centered
             >
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title>{this.getTitle()}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
+                    <Alert variant="danger" show={!isNull(this.state.form_error)} >
+                        {this.state.form_error}
+                    </Alert>
                     {this.getFormComponent()}
                 </Modal.Body>
 

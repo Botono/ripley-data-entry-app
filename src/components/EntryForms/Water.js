@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import Form from 'react-bootstrap/Form';
 
@@ -9,9 +10,11 @@ class WaterForm extends Component {
         super(props);
 
         this.state = {
+            water_date: moment().format('YYYY-MM-DD'),
             water_weight: 0,
             kibble_eaten: false,
             water_notes: '',
+            error: null,
         };
     }
 
@@ -37,6 +40,7 @@ class WaterForm extends Component {
 
     handleFormChange = () => {
         let form_data = {};
+        form_data['date'] = this.state.water_date;
         form_data['water'] = this.state.water_weight;
         form_data['kibble_eaten'] = this.state.kibble_eaten;
         form_data['notes'] = this.state.water_notes;
@@ -49,7 +53,7 @@ class WaterForm extends Component {
             <Form>
                 <Form.Group controlId="formWaterWeight">
                     <Form.Label>Water Bowl Weight</Form.Label>
-                    <Form.Control type="number" onChange={this.handleWeightChange} />
+                    <Form.Control type="number" onChange={this.handleWeightChange} autoFocus />
                     <Form.Text className="text-muted">
                         The total weight of the water bowl first thing in the morning.
                     </Form.Text>
