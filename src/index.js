@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route } from "react-router-dom";
+
 import './index.css';
-import App from './App';
+import Login from './components/Login';
+import Overview from './containers/Overview';
+
+import Navigation from './components/Nav/Navigation';
 import * as serviceWorker from './serviceWorker';
+
+class App extends Component {
+    render() {
+        return (
+            <BrowserRouter basename="/dashboard">
+                <div>
+                    <Navigation />
+                    <Route exact path="/" component={Overview} />
+
+                    <Route path="/login" component={Login} />
+                </div>
+            </BrowserRouter>
+        );
+    }
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

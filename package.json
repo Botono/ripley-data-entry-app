@@ -5,13 +5,19 @@
   "dependencies": {
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "palx": "^1.0.3",
+    "react-bootstrap": "^1.0.0-beta.5",
+    "react-router-dom": "^4.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "scp -r ./build/* botono9@ripley.dog:ripley.dog/public/dataentry"
   },
   "eslintConfig": {
     "extends": "react-app"
