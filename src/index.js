@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 class App extends Component {
     render() {
         return (
-            <BrowserRouter basename="/dashboard">
+            <BrowserRouter basename="/dataentry">
                 <div>
                     <Navigation />
                     <Route exact path="/" component={Overview} />

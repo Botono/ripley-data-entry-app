@@ -2,6 +2,7 @@
   "name": "ripley-data-entry-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ripley.dog/dataentry",
   "dependencies": {
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
