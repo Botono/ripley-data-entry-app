@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { isEmpty } from 'lodash';
 
 import Form from 'react-bootstrap/Form';
 
@@ -43,7 +44,9 @@ class WaterForm extends Component {
         form_data['date'] = this.state.water_date;
         form_data['water'] = this.state.water_weight;
         form_data['kibble_eaten'] = this.state.kibble_eaten;
-        form_data['notes'] = this.state.water_notes;
+        if (!isEmpty(this.state.water_notes)) {
+            form_data['notes'] = this.state.water_notes;
+        }
 
         this.props.updateFormData(form_data);
     }

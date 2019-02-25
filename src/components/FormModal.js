@@ -90,10 +90,11 @@ class FormModal extends Component {
                         form_error: json_data.error,
                     });
                 } else {
+                    that.props.closeModal();
                     that.setState({
                         form_data: {},
                         form_error: null,
-                    }, this.props.closeModal);
+                    });
                 }
             });
     }
