@@ -56,6 +56,13 @@ class Overview extends Component {
         })
     }
 
+    showChangelogForm = () => {
+        this.setState({
+            show_form_modal: true,
+            which_form: 'changelog',
+        })
+    }
+
 
     render() {
         if (this.state.redirect_to_login) {
@@ -74,9 +81,7 @@ class Overview extends Component {
                         <Card>
                             <Card.Body className="dataEntryButtons">
                                 <Button onClick={this.showWaterForm}>Water</Button>
-                                <Button>Changelog</Button>
-                                <Button>Weight</Button>
-                                <Button>Event</Button>
+                                <Button onClick={this.showChangelogForm}>Changelog</Button>
                             </Card.Body>
                         </Card>
                     </Col>

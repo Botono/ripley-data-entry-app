@@ -7,6 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import { postData } from '../common/utils'
 
 import WaterForm from './EntryForms/Water';
+import ChangelogForm from './EntryForms/Changelog';
 
 
 class FormModal extends Component {
@@ -19,6 +20,10 @@ class FormModal extends Component {
                 endpoint: '/water',
                 title: 'Water',
             },
+            changelog: {
+                endpoint: '/changelog',
+                title: 'Changelog',
+            }
         };
 
         this.state = {
@@ -48,6 +53,11 @@ class FormModal extends Component {
                 case 'water':
                     theForm =  (
                         <WaterForm updateFormData={this.updateFormData} />
+                    );
+                    break;
+                case 'changelog':
+                    theForm = (
+                        <ChangelogForm updateFormData={this.updateFormData} />
                     );
                     break;
                 default:
