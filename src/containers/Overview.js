@@ -4,6 +4,7 @@ import { isNull } from 'lodash';
 import { Container, Row, Col } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import moment from 'moment';
 
 import FormModal from '../components/FormModal';
@@ -20,6 +21,7 @@ class Overview extends Component {
             redirect_to_login: false,
             which_form: null,
             show_form_modal: false,
+            show_save_success: false,
         };
     }
 
@@ -63,6 +65,19 @@ class Overview extends Component {
         })
     }
 
+    toggleSaveSuccessAlert = () => {
+        const { show_save_success } = this.state;
+
+        this.setState({
+            show_save_success: !show_save_success,
+        });
+    }
+
+    handleSaveSuccess = () => {
+        this.toggleSaveSuccessAlert();
+        window.setTimeout(this.toggleSaveSuccessAlert, 2000);
+    }
+
 
     render() {
         if (this.state.redirect_to_login) {
@@ -75,7 +90,9 @@ class Overview extends Component {
                     showModal={this.state.show_form_modal}
                     closeModal={this.closeModal}
                     whichForm={this.state.which_form}
+                    onSaveSuccess={this.handleSaveSuccess}
                 />
+
                 <Row>
                     <Col>
                         <Card>
@@ -84,8 +101,15 @@ class Overview extends Component {
                                 <Button onClick={this.showChangelogForm}>Changelog</Button>
                             </Card.Body>
                         </Card>
+                        <Alert
+                            variant="success"
+                            show={this.state.show_save_success}>
+                            Data saved.
+                        </Alert>
                     </Col>
                 </Row>
+
+
             </Container>
         );
     }

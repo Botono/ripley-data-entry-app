@@ -75,3 +75,11 @@ button.btn-primary {
 .dataEntryButtons button {
   margin: 10px;
 }
+
+.alert-save-success {
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}

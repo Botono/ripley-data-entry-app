@@ -29,6 +29,7 @@ class FormModal extends Component {
         this.state = {
             form_data: {},
             form_error: null,
+            saving: false,
         };
     }
 
@@ -88,9 +89,19 @@ class FormModal extends Component {
         return '';
     }
 
+    toggleSaving = () => {
+        const { saving } = this.state;
+
+        this.setState({
+            saving: !saving,
+        });
+    }
+
     saveForm = () => {
         const that = this;
         let { form_data } = this.state;
+
+        this.toggleSaving();
 
         postData(this.getEndpoint(), form_data)
             .then(function (json_data) {
@@ -105,11 +116,20 @@ class FormModal extends Component {
                         form_data: {},
                         form_error: null,
                     });
+                    that.props.onSaveSuccess();
                 }
+                that.toggleSaving();
             });
     }
 
     render() {
+        const { saving } = this.state;
+        let saveButtonValue = 'Save';
+
+        if (saving) {
+            saveButtonValue = <i class="fas fa-sync fa-spin"></i>;
+        }
+
         return (
             <Modal
                 show={this.props.showModal}
@@ -128,7 +148,7 @@ class FormModal extends Component {
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.props.closeModal}>Cancel</Button>
-                    <Button variant="primary" onClick={this.saveForm}>Save</Button>
+                    <Button variant="primary" onClick={this.saveForm}>{saveButtonValue}</Button>
                 </Modal.Footer>
             </Modal>
         );
