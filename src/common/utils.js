@@ -16,7 +16,7 @@ export const postData = (url, body, params) => {
     return fetch(fetchUrl, {
         method: 'POST',
         headers: {
-            "x-api-key": window.localStorage.getItem('api-key'),
+            "x-api-key": window.localStorage.getItem('ripley-dashboard-api-key'),
             "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
@@ -41,7 +41,7 @@ export const fetchData = (url, method, params) => {
     return fetch(fetchUrl, {
         method: method,
         headers: {
-            "x-api-key": window.localStorage.getItem('api-key'),
+            "x-api-key": window.localStorage.getItem('ripley-dashboard-api-key'),
             "Content-Type": "application/json",
         },
     })
