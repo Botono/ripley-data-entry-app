@@ -39,6 +39,12 @@ class WaterForm extends Component {
         }, this.handleFormChange);
     }
 
+    handleDateChange = (e) => {
+        this.setState({
+            water_date: e.target.value,
+        });
+    }
+
     handleFormChange = () => {
         let form_data = {};
         form_data['date'] = this.state.water_date;
@@ -54,6 +60,10 @@ class WaterForm extends Component {
     render() {
         return (
             <Form>
+                <Form.Group controlId="formWaterDate">
+                    <Form.Label>Date</Form.Label>
+                    <Form.Control type="date" onChange={this.handleDateChange} value={this.state.water_date} />
+                </Form.Group>
                 <Form.Group controlId="formWaterWeight">
                     <Form.Label>Water Bowl Weight</Form.Label>
                     <Form.Control type="number" onChange={this.handleWeightChange} autoFocus />
