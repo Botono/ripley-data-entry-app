@@ -11,7 +11,7 @@ class WaterForm extends Component {
         super(props);
 
         this.state = {
-            water_date: moment().format('YYYY-MM-DD'),
+            water_date: moment().subtract(1, 'days').format('YYYY-MM-DD'),
             water_weight: 0,
             kibble_eaten: false,
             water_notes: '',
