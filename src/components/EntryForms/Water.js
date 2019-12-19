@@ -16,12 +16,14 @@ class WaterForm extends Component {
             kibble_eaten: false,
             water_notes: '',
             error: null,
+            water_actual: 0,
         };
     }
 
     handleWeightChange = (e) => {
+        let val = parseInt(e.target.value) || 0;
         this.setState({
-            water_weight: parseInt(e.target.value),
+            water_weight: parseInt(val),
         }, this.handleFormChange);
     }
 
@@ -46,6 +48,7 @@ class WaterForm extends Component {
     }
 
     handleFormChange = () => {
+        this.getActualVolume();
         let form_data = {};
         form_data['date'] = this.state.water_date;
         form_data['water'] = this.state.water_weight;
@@ -55,6 +58,18 @@ class WaterForm extends Component {
         }
 
         this.props.updateFormData(form_data);
+    }
+
+    getActualVolume = () => {
+        let water_actual;
+        if (this.state.water_weight === 0) {
+            water_actual = 0;
+        } else {
+            water_actual = 3000 - (this.state.water_weight - 1595);
+        }
+        this.setState({
+            water_actual: water_actual,
+        });
     }
 
     render() {
@@ -70,6 +85,7 @@ class WaterForm extends Component {
                     <Form.Text className="text-muted">
                         The total weight of the water bowl first thing in the morning.
                     </Form.Text>
+                    <span className="small">Water consumed: {this.state.water_actual / 1000} l</span>
                 </Form.Group>
                 <Form.Group controlId="formKibbleEaten">
                     <Form.Check
