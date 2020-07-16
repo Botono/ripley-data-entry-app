@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://ripley.dog/dataentry",
   "dependencies": {
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "palx": "^1.0.3",
     "react": "^16.8.3",
